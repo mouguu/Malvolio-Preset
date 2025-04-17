@@ -1,0 +1,45 @@
+{
+    "instruct": {
+        "input_sequence": "### Instruction:",
+        "output_sequence": "### Response:",
+        "last_output_sequence": "",
+        "system_sequence": "### Input:",
+        "stop_sequence": "",
+        "wrap": true,
+        "macro": true,
+        "names_behavior": "force",
+        "activation_regex": "",
+        "system_sequence_prefix": "",
+        "system_sequence_suffix": "",
+        "first_output_sequence": "",
+        "skip_examples": false,
+        "output_suffix": "\n\n",
+        "input_suffix": "\n\n",
+        "system_suffix": "\n\n",
+        "user_alignment_message": "",
+        "system_same_as_user": false,
+        "last_system_sequence": "",
+        "first_input_sequence": "",
+        "last_input_sequence": "",
+        "names_force_groups": true,
+        "name": "Alpaca"
+    },
+    "context": {
+        "story_string": "{{#if system}}{{system}}\n{{/if}}{{#if wiBefore}}{{wiBefore}}\n{{/if}}{{#if description}}{{description}}\n{{/if}}{{#if personality}}{{char}}'s personality: {{personality}}\n{{/if}}{{#if scenario}}Scenario: {{scenario}}\n{{/if}}{{#if wiAfter}}{{wiAfter}}\n{{/if}}{{#if persona}}{{persona}}\n{{/if}}",
+        "example_separator": "***",
+        "chat_start": "***",
+        "use_stop_strings": true,
+        "allow_jailbreak": false,
+        "names_as_stop_strings": true,
+        "always_force_name2": true,
+        "trim_sentences": false,
+        "single_line": false,
+        "name": "Default"
+    },
+    "reasoning": {
+        "name": "Custom",
+        "prefix": "<thinking>",
+        "suffix": "</thinking>",
+        "separator": "\n\n"
+    }
+}
