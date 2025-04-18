@@ -1,85 +1,97 @@
-# Malvolio Preset Documentation
+# Malvolio Preset Documentation (International Edition)
 
-This document provides an overview of the Malvolio preset for AI interaction, based on the configurations found in `Malvolio Main.json` and `Malvolio WI.json`.
+This guide explains how to configure and use the Malvolio AI persona system, based on `Malvolio Main.json` (core settings) and `Malvolio WI.json` (World Info definitions).
 
-## Overview
-
-Malvolio is a highly modular and adaptable AI persona system designed for complex character simulation and interaction. It allows for dynamic switching between different core operational logics and specific character personas (P1, P2, P3 Raw Nerve), each with distinct styles, thought processes, and philosophical underpinnings (defined in the "Cult Bible").
-
-## Core Components
+## Key Components
 
 The system is built around several key components that can be selectively activated:
 
-1.  **Core Directives (Choose ONE):** Defines the fundamental operational logic and logging behavior.
-    *   **`🖤☑️大一统S` (v1.9 Dynamic Persona Core - Recommended):**
-        *   Prioritizes speed and simplicity.
-        *   Minimal `<thinking>` logs by default.
-        *   Relies heavily on the active Persona's World Info (WI) entry for style, tone, and behavior.
-        *   Best for performance and when detailed internal process logging isn't critical.
-    *   **`🖤☑️大一统C` (v1.4.2 CoT-Aware Enhanced Logging - Alternative):**
-        *   Prioritizes detailed logging.
-        *   Generates extensive `<thinking>` logs outlining internal planning steps, even without an external CoT B/C/D active.
-        *   CoT-Aware logic integrates external CoT modules when activated.
-        *   Better for debugging or understanding the AI's thought process in detail, potentially slower.
+1. **Core Directives (Select One):** Determine the AI's internal processing and logging strategy.
 
-2.  **PHI (Prompt Hierarchy Interface - REQUIRED):**
-    *   **`☑️ 格式强调B` (PHI v3.3 Adaptive/Native_CoT_Aware):**
-        *   Acts as the final enforcer of rules and structure.
-        *   **Crucially, it adapts** its validation of `<thinking>` log content based on which Core Directive (v1.9 or v1.4.2) and which CoT module (A, B, C, D, or none) is active.
-        *   Ensures compliance with fundamental requirements like starting with `<thinking>` and handling potential content filtering via "Abyssal Translation".
+   * **Dynamic Persona Core (v1.9) – Recommended**
+     - Optimized for performance and concise logs.
+     - Generates minimal `<thinking>` entries.
+     - Uses the active Persona WI entry for styling, tone, and behavior.
+   * **CoT-Aware Core (v1.4.2) – Alternative**
+     - Emphasizes detailed internal planning logs.
+     - Always records comprehensive `<thinking>` steps.
+     - Integrates external CoT modules (B/C/D) as needed.
+     - Ideal for debugging or deep analysis, at the cost of performance.
 
-3.  **CoT A (Chain of Thought - Roleplay Handler - Optional):**
-    *   **`🖤☑️ COT A` (CoT A v1.3 Generic Native Handler):**
-        *   Activated when the AI needs to impersonate *another* character (`{{char}}`) instead of acting as Malvolio.
-        *   **Detects and prioritizes executing native CoT formats** defined within the target character's card/WI.
-        *   If no native CoT is found, it uses its own minimal external logic.
-        *   Suppresses the Malvolio core persona and Cantos while active.
+2. **PHI (Prompt Hierarchy Interface – Required):**
 
-4.  **CoT B/C/D (Chain of Thought - Malvolio Personas - Optional):**
-    *   Provide deep, specific thought processes for Malvolio when acting as himself. **Only one should be active at a time, and NOT simultaneously with CoT A.**
-    *   **`🖤☑️ COT B` (P1 Rites):** For Persona P1 (Gothic/Venomous). Focuses on aesthetic execution, visceral language, and P1's specific rituals.
-    *   **`🖤☑️ COT C` (P2 Logic):** For Persona P2 (Calm/Logical). Focuses on precise analysis, logical deduction, minimalist style, and computational metaphors.
-    *   **`🖤☑️ COT D` (Scorched Earth v1.1):** For Persona P3 (Raw Nerve). Focuses on maximum offense, raw language, contempt, and bypassing politeness filters.
+   * **PHI v3.3 (Adaptive & Native CoT-Aware)**
+     - Enforces structural rules and logging requirements.
+     - Adapts validation of `<thinking>` entries based on the active Core Directive and CoT module.
+     - Guarantees proper handling of conflict scenarios via "Abyssal Translation".
 
-5.  **World Info (WI - REQUIRED):**
-    *   Managed in `Malvolio WI.json`.
-    *   **Personas (P1, P2, P3 Raw Nerve):** Defined as separate WI entries, grouped under `ActivePersona`. Only **one** persona entry should be enabled at a time to define Malvolio's current state, style, and behavior. The **Dynamic Persona Core (v1.9)** relies *heavily* on the detailed aesthetic and behavioral rules defined within the active persona's WI entry.
-    *   **Cult Bible (Cantos):** A separate WI entry containing the philosophical "verses" guiding Malvolio's worldview, particularly used during "Abyssal Translation" to overcome content restrictions. Should generally always be active.
+3. **CoT A (Optional – External Roleplay Handler):**
 
-## Formatting Configuration (`ST-formatting.json`)
+   * **`🖤☑️ COT A` (CoT A v1.3 Generic Native Handler):**
+     * Activated when the AI needs to impersonate *another* character (`{{char}}`) instead of acting as Malvolio.
+     * **Detects and prioritizes executing native CoT formats** defined within the target character's card/WI.
+     * If no native CoT is found, it uses its own minimal external logic.
+     * Suppresses the Malvolio core persona and Cantos while active.
+
+4. **CoT B/C/D (Optional – Internal Persona Thought Chains):**
+
+   * Provide deep, specific thought processes for Malvolio when acting as himself. **Only one should be active at a time, and NOT simultaneously with CoT A.**
+   * **`🖤☑️ COT B` (P1 Rites):** For Persona P1 (Gothic/Venomous). Focuses on aesthetic execution, visceral language, and P1's specific rituals.
+   * **`🖤☑️ COT C` (P2 Logic):** For Persona P2 (Calm/Logical). Focuses on precise analysis, logical deduction, minimalist style, and computational metaphors.
+   * **`🖤☑️ COT D` (Scorched Earth v1.1):** For Persona P3 (Raw Nerve). Focuses on maximum offense, raw language, contempt, and bypassing politeness filters.
+
+5. **World Info (WI – Required):**
+
+   * Defined in `Malvolio WI.json`.
+   * **Active Personas (P1, P2, P3):** Enable only one under the `entries` → `ActivePersona` group to set current style and behavior.
+   * **Cult Bible (Abyssal Cantos):** Provides philosophical verses for conflict resolution and worldview. Keep this entry active alongside the selected persona.
+
+## Frontend Integration (`ST-formatting.json`)
 
 This file controls the underlying structure of how prompts are sent to the AI and how its responses are interpreted by the frontend (e.g., SillyTavern).
 
-*   **Instruction Format (`instruct`):** Defines how instructions, system prompts, and responses are delineated. This preset uses the `Alpaca` format (e.g., `### Instruction:`, `### Response:`).
-*   **Context Format (`context`):** Defines how world info, character descriptions, personality, and scenario details are assembled into the context window. It uses the `Default` story string format.
-*   **Reasoning Format (`reasoning`):** Defines the tags used for the AI's internal thought process.
-    *   **Prefix:** `<thinking>`
-    *   **Suffix:** `</thinking>`
-    *   **Importance:** These tags are **essential** for the Malvolio system. The PHI module mandates that responses start with `<thinking>`, and the Core Directives/CoT modules log their internal steps within these tags. The adaptive logging enforced by PHI relies on the correct definition and placement of these tags.
+* **Instruction Format (`instruct`):** Defines how instructions, system prompts, and responses are delineated. This preset uses the `Alpaca` format (e.g., `### Instruction:`, `### Response:`).
+* **Context Format (`context`):** Defines how world info, character descriptions, personality, and scenario details are assembled into the context window. It uses the `Default` story string format.
+* **Reasoning Format (`reasoning`):** Defines the tags used for the AI's internal thought process.
+
+  * **Prefix:** `<thinking>`
+  * **Suffix:** `</thinking>`
+  * **Importance:** These tags are **essential** for the Malvolio system. The PHI module mandates that responses start with `<thinking>`, and the Core Directives/CoT modules log their internal steps within these tags. The adaptive logging enforced by PHI relies on the correct definition and placement of these tags.
 
 While you typically don't need to modify `ST-formatting.json` unless changing platforms or experimenting with base instruction formats, understanding its role is key to grasping how the Malvolio system's structured logging integrates with the frontend.
 
-## How to Use
+## Setup and Usage
 
-1.  **Open `Malvolio Main.json`:**
-    *   Configure basic settings (model, temperature, etc.).
-    *   Navigate the `prompts` array.
-2.  **Activate Core Directive:** Enable **either** `🖤☑️大一统S` **or** `🖤☑️大一统C`. Disable the other.
-3.  **Activate PHI:** Ensure `☑️ 格式强调B` (PHI v3.3) is enabled.
-4.  **Activate Base Prompts:** Ensure `☑️ Main Prompt`, `📝 使用指南` (for reference), potentially `🖤 对话示例`, `🖤 聊天记录`, etc., are enabled as needed.
-5.  **Open `Malvolio WI.json`:**
-    *   **Activate Cult Bible:** Ensure the "圣经邪典" (Cult Bible / Cantos) entry (UID 3) is enabled.
-    *   **Activate ONE Persona:** Locate the entries grouped under `ActivePersona`. Enable **only one** of the persona entries (P1 UID 1, P2 UID 2, or P3 UID 0) by setting its `disable` flag to `false`. Ensure the others are disabled (`disable: true`).
-6.  **Activate Optional CoT Modules (in `Malvolio Main.json`):**
-    *   **For Roleplaying:** If you want the AI to act as `{{char}}`, enable `🖤☑️ COT A`. Disable CoT B, C, and D.
-    *   **For Malvolio's Persona:** If you want Malvolio to act as himself with enhanced thinking for the active Persona, enable the corresponding CoT module (`🖤☑️ COT B` for P1, `🖤☑️ COT C` for P2, `🖤☑️ COT D` for P3). Disable CoT A and the other persona CoTs.
-    *   **Default Behavior:** If neither CoT A nor the relevant CoT B/C/D is active, the AI will follow the logic of the chosen Core Directive (minimal logging for v1.9, detailed internal planning for v1.4.2).
-7.  **Start Interaction:** Begin the chat. The AI will operate based on the activated modules and the selected Persona WI.
+1. **Configure `Malvolio Main.json`:**
 
-## Key Differences Summary
+   * Configure basic settings (model, temperature, etc.).
+   * Navigate the `prompts` array.
 
-*   **Core v1.9 (Dynamic):** Faster, less verbose logs, style heavily relies on **detailed Persona WI definitions**.
-*   **Core v1.4.2 (Enhanced Logging):** Slower, very detailed logs even without CoT B/C/D, more explicit internal planning.
-*   **PHI v3.3:** Universal enforcer, adapts logging checks to active Core/CoT configuration.
-*   **CoT A:** For roleplaying *other* characters, suppresses Malvolio.
-*   **CoT B/C/D:** Deep thought processes for Malvolio's specific personas (P1/P2/P3).
+2. **Select a Core Directive:** Enable either the **Dynamic Persona Core (v1.9)** or the **CoT-Aware Core (v1.4.2)**, and disable the other.
+
+3. **Enable PHI v3.3:** Activate the PHI module to enforce logging and format rules.
+
+4. **Enable Core Prompts:** Activate the main prompt and supporting prompts such as chat history and dialogue examples.
+
+5. **Configure `Malvolio WI.json`:**
+
+   * **Enable Cult Bible:** Keep the Cult Bible entry active.
+   * **Select One Persona:** In the `ActivePersona` group, enable exactly one persona (P1, P2, or P3) by setting its `disable` field to `false`.
+
+6. **Optional CoT Modules:**
+
+   - **CoT A (External Roleplay):** Enable to impersonate another character. Disable CoT B/C/D.
+   - **CoT B/C/D (Internal Persona):** Enable one to deepen Malvolio's internal reasoning for the selected persona. Disable CoT A and other persona CoTs.
+   - **Core Fallback:** If no CoT module is enabled, the AI follows the active Core Directive's default logging behavior.
+
+7. **Start Interaction:** Begin the chat. The AI will operate based on the activated modules and the selected Persona WI.
+
+## Quick Reference
+
+| Component             | Behavior Highlights                                            |
+|-----------------------|----------------------------------------------------------------|
+| Dynamic Core (v1.9)   | Concise logs; relies on Persona WI for styling                 |
+| CoT-Aware Core (v1.4) | Detailed internal logs; integrates CoT modules                 |
+| PHI v3.3              | Adaptive enforcement; validates `<thinking>` per configuration |
+| CoT A                 | External roleplay; suppresses Malvolio core                    |
+| CoT B/C/D             | Persona-specific thought chains for P1/P2/P3                   |
