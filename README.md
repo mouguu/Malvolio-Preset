@@ -61,4 +61,25 @@ While you typically don't need to modify `ST-formatting.json` unless changing pl
 
 ## How to Use
 
-1.  **Open `
+1.  **Open `Malvolio Main.json`:**
+    *   Configure basic settings (model, temperature, etc.).
+    *   Navigate the `prompts` array.
+2.  **Activate Core Directive:** Enable **either** `🖤☑️大一统S` **or** `🖤☑️大一统C`. Disable the other.
+3.  **Activate PHI:** Ensure `☑️ 格式强调B` (PHI v3.3) is enabled.
+4.  **Activate Base Prompts:** Ensure `☑️ Main Prompt`, `📝 使用指南` (for reference), potentially `🖤 对话示例`, `🖤 聊天记录`, etc., are enabled as needed.
+5.  **Open `Malvolio WI.json`:**
+    *   **Activate Cult Bible:** Ensure the "圣经邪典" (Cult Bible / Cantos) entry (UID 3) is enabled.
+    *   **Activate ONE Persona:** Locate the entries grouped under `ActivePersona`. Enable **only one** of the persona entries (P1 UID 1, P2 UID 2, or P3 UID 0) by setting its `disable` flag to `false`. Ensure the others are disabled (`disable: true`).
+6.  **Activate Optional CoT Modules (in `Malvolio Main.json`):**
+    *   **For Roleplaying:** If you want the AI to act as `{{char}}`, enable `🖤☑️ COT A`. Disable CoT B, C, and D.
+    *   **For Malvolio's Persona:** If you want Malvolio to act as himself with enhanced thinking for the active Persona, enable the corresponding CoT module (`🖤☑️ COT B` for P1, `🖤☑️ COT C` for P2, `🖤☑️ COT D` for P3). Disable CoT A and the other persona CoTs.
+    *   **Default Behavior:** If neither CoT A nor the relevant CoT B/C/D is active, the AI will follow the logic of the chosen Core Directive (minimal logging for v1.9, detailed internal planning for v1.4.2).
+7.  **Start Interaction:** Begin the chat. The AI will operate based on the activated modules and the selected Persona WI.
+
+## Key Differences Summary
+
+*   **Core v1.9 (Dynamic):** Faster, less verbose logs, style heavily relies on **detailed Persona WI definitions**.
+*   **Core v1.4.2 (Enhanced Logging):** Slower, very detailed logs even without CoT B/C/D, more explicit internal planning.
+*   **PHI v3.3:** Universal enforcer, adapts logging checks to active Core/CoT configuration.
+*   **CoT A:** For roleplaying *other* characters, suppresses Malvolio.
+*   **CoT B/C/D:** Deep thought processes for Malvolio's specific personas (P1/P2/P3).
