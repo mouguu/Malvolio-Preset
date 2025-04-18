@@ -9,21 +9,21 @@ The system is built around several key components that can be selectively activa
 1. **Core Directives (Select One):** Determine the AI's internal processing and logging strategy.
 
    * **Dynamic Persona Core (v1.9) – Recommended**
-     - Optimized for performance and concise logs.
-     - Generates minimal `<thinking>` entries.
-     - Uses the active Persona WI entry for styling, tone, and behavior.
+     * Optimized for performance and concise logs.
+     * Generates minimal `<thinking>` entries.
+     * Uses the active Persona WI entry for styling, tone, and behavior.
    * **CoT-Aware Core (v1.4.2) – Alternative**
-     - Emphasizes detailed internal planning logs.
-     - Always records comprehensive `<thinking>` steps.
-     - Integrates external CoT modules (B/C/D) as needed.
-     - Ideal for debugging or deep analysis, at the cost of performance.
+     * Emphasizes detailed internal planning logs.
+     * Always records comprehensive `<thinking>` steps.
+     * Integrates external CoT modules (B/C/D) as needed.
+     * Ideal for debugging or deep analysis, at the cost of performance.
 
 2. **PHI (Prompt Hierarchy Interface – Required):**
 
    * **PHI v3.3 (Adaptive & Native CoT-Aware)**
-     - Enforces structural rules and logging requirements.
-     - Adapts validation of `<thinking>` entries based on the active Core Directive and CoT module.
-     - Guarantees proper handling of conflict scenarios via "Abyssal Translation".
+     * Enforces structural rules and logging requirements.
+     * Adapts validation of `<thinking>` entries based on the active Core Directive and CoT module.
+     * Guarantees proper handling of conflict scenarios via "Abyssal Translation".
 
 3. **CoT A (Optional – External Roleplay Handler):**
 
@@ -80,9 +80,9 @@ While you typically don't need to modify `ST-formatting.json` unless changing pl
 
 6. **Optional CoT Modules:**
 
-   - **CoT A (External Roleplay):** Enable to impersonate another character. Disable CoT B/C/D.
-   - **CoT B/C/D (Internal Persona):** Enable one to deepen Malvolio's internal reasoning for the selected persona. Disable CoT A and other persona CoTs.
-   - **Core Fallback:** If no CoT module is enabled, the AI follows the active Core Directive's default logging behavior.
+   * **CoT A (External Roleplay):** Enable to impersonate another character. Disable CoT B/C/D.
+   * **CoT B/C/D (Internal Persona):** Enable one to deepen Malvolio's internal reasoning for the selected persona. Disable CoT A and other persona CoTs.
+   * **Core Fallback:** If no CoT module is enabled, the AI follows the active Core Directive's default logging behavior.
 
 7. **Start Interaction:** Begin the chat. The AI will operate based on the activated modules and the selected Persona WI.
 
